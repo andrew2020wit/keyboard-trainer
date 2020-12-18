@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
+import { GeneralService } from './general-service.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   title = 'keyboard-trainer';
+  constructor(private generalService: GeneralService) {
+    this.generalService.loadState();
+    setInterval(() => {
+      this.generalService.saveState();
+    }, 2000);
+  }
 }
