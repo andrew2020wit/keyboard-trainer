@@ -19,11 +19,11 @@ enum CharColors {
   styleUrls: ['./trainer.component.scss'],
 })
 export class TrainerComponent implements OnInit {
-  sourceString = ' ' + defaultText;
+  sourceString = defaultText;
   sourceStringPointer = 0;
 
   futureStringArr: ColorChar[] = [];
-  futureStringArrMaxLength = 30;
+  futureStringArrMaxLength = 50;
 
   pastStringArr: ColorChar[] = [];
   pastStringArrMaxLength = 30;
@@ -38,21 +38,25 @@ export class TrainerComponent implements OnInit {
 
   onKeyPress(event) {
     const key = event.key;
+    const needKey = this.futureStringArr[0].char;
 
-    if (this.futureStringArr[0].char == key) {
+    if (needKey == key) {
       this.pushPastStringArr({
-        char: this.futureStringArr[0].char,
+        char: needKey,
         color: CharColors.true,
       });
     } else {
+      //console.log('not match, needKey, key: ', needKey, '-', key);
+
       this.pushPastStringArr({
-        char: this.futureStringArr[0].char,
+        char: needKey,
         color: CharColors.wrong,
       });
       this.pushPastStringArr({
         char: `/${key}/`,
         color: CharColors.wrong2,
       });
+      this.addPenaltyChar(needKey);
     }
 
     this.futureStringArr.shift();
@@ -83,5 +87,40 @@ export class TrainerComponent implements OnInit {
 
       this.futureStringArr.push(colorChar);
     }
+  }
+
+  addPenaltyChar(char: string) {
+    const newFutureStringArr: ColorChar[] = [];
+    const wrongChar: ColorChar = { char: char, color: CharColors.wrong };
+
+    for (let i = 0; i < 5; i++) {
+      if (this.futureStringArr.length == 0) {
+        break;
+      }
+      newFutureStringArr.push(this.futureStringArr.shift());
+    }
+    newFutureStringArr.push(wrongChar);
+
+    for (let i = 0; i < 5; i++) {
+      if (this.futureStringArr.length == 0) {
+        break;
+      }
+      newFutureStringArr.push(this.futureStringArr.shift());
+    }
+    newFutureStringArr.push(wrongChar);
+
+    for (let i = 0; i < 5; i++) {
+      if (this.futureStringArr.length == 0) {
+        break;
+      }
+      newFutureStringArr.push(this.futureStringArr.shift());
+    }
+    newFutureStringArr.push(wrongChar);
+
+    while (this.futureStringArr.length != 0) {
+      newFutureStringArr.push(this.futureStringArr.shift());
+    }
+
+    this.futureStringArr = newFutureStringArr;
   }
 }
