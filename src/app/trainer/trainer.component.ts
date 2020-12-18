@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from './../general-service.service';
-import { defaultText } from './default-text';
 
 class ColorChar {
   char: string;
@@ -20,7 +19,7 @@ enum CharColors {
   styleUrls: ['./trainer.component.scss'],
 })
 export class TrainerComponent implements OnInit {
-  sourceString = defaultText;
+  sourceString = '';
   sourceStringPointer = 0;
 
   futureStringArr: ColorChar[] = [];
@@ -35,7 +34,13 @@ export class TrainerComponent implements OnInit {
   time1 = 0;
   time2 = 0;
 
-  constructor(private generalService: GeneralService) {}
+  constructor(private generalService: GeneralService) {
+    this.generalService.sourceString$.subscribe((str) => {
+      this.sourceString = str;
+      this.futureStringArr = [];
+      this.fillFutureStringArr();
+    });
+  }
 
   ngOnInit(): void {
     this.fillFutureStringArr();

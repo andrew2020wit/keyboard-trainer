@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { defaultText } from './trainer/default-text';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,11 @@ export class GeneralService {
   speed$ = new BehaviorSubject<number>(0);
   times$ = new BehaviorSubject<number>(0);
   presses$ = new BehaviorSubject<number>(0);
+  sourceString$ = new BehaviorSubject<string>('');
 
-  constructor() {}
+  constructor() {
+    this.sourceString$.next(defaultText);
+  }
 
   takeSpeedData(time: number) {
     this.setTemes(this.times + time);
