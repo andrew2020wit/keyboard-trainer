@@ -60,11 +60,11 @@ export class TrainerComponent implements OnInit {
       this.time1 = this.time2;
     } else {
       this.pushPastStringArr({
-        char: needKey,
+        char: `|${needKey}|`,
         color: CharColors.wrong,
       });
       this.pushPastStringArr({
-        char: `/${key}/`,
+        char: `|${key}|`,
         color: CharColors.wrong2,
       });
       this.addPenaltyChar(needKey);
@@ -81,6 +81,7 @@ export class TrainerComponent implements OnInit {
     if (this.pastStringArr.length > this.pastStringArrMaxLength) {
       this.pastStringArr.shift();
     }
+    //console.log('this.pastStringArr', this.pastStringArr);
   }
 
   fillFutureStringArr() {
