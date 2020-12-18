@@ -1,25 +1,32 @@
-<p>trainer works!</p>
+<!-- view -->
 <div class="container">
   <div class="past">
     <app-char-span
       *ngFor="let char of pastStringArr"
-      [char]="char"
-      color="green"
+      [char]="char.char"
+      [color]="char.color"
     ></app-char-span>
   </div>
 
-  <div class="future">{{ futureString }} <app-char-span></app-char-span></div>
+  <div class="future">
+    <app-char-span
+      *ngFor="let char of futureStringArr"
+      [char]="char.char"
+      [color]="char.color"
+    ></app-char-span>
+  </div>
 </div>
 
+<!-- input -->
 <div class="input-div">
   <mat-form-field style="width: 100%">
     <mat-label>Type here!</mat-label>
     <input
       matInput
-      [placeholder]="futureString"
+      placeholder="Type here!"
       autofocus
       autocomplete="off"
-      (keydown)="onKeyDown($event)"
+      (keypress)="onKeyPress($event)"
       [(ngModel)]="inputValue"
     />
   </mat-form-field>

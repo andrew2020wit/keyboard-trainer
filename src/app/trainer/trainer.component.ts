@@ -1,31 +1,87 @@
 import { Component, OnInit } from '@angular/core';
 import { defaultText } from './default-text';
 
+class ColorChar {
+  char: string;
+  color: CharColors;
+}
+
+enum CharColors {
+  true = 'black',
+  wrong = 'red',
+  wrong2 = 'yellow',
+  special = 'blue',
+}
+
 @Component({
   selector: 'app-trainer',
   templateUrl: './trainer.component.html',
   styleUrls: ['./trainer.component.scss'],
 })
 export class TrainerComponent implements OnInit {
-  baseString = defaultText;
+  sourceString = ' ' + defaultText;
+  sourceStringPointer = 0;
 
-  futureString = 'futureString';
-  futureStringArr = [];
+  futureStringArr: ColorChar[] = [];
+  futureStringArrMaxLength = 30;
 
-  pastString = '';
-  pastStringArr = [];
+  pastStringArr: ColorChar[] = [];
+  pastStringArrMaxLength = 30;
 
   inputValue = '';
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fillFutureStringArr();
+  }
 
-  onKeyDown(event) {
+  onKeyPress(event) {
     const key = event.key;
-    // this.pastString = this.pastString + key;
-    this.pastStringArr.push(key);
+
+    if (this.futureStringArr[0].char == key) {
+      this.pushPastStringArr({
+        char: this.futureStringArr[0].char,
+        color: CharColors.true,
+      });
+    } else {
+      this.pushPastStringArr({
+        char: this.futureStringArr[0].char,
+        color: CharColors.wrong,
+      });
+      this.pushPastStringArr({
+        char: `/${key}/`,
+        color: CharColors.wrong2,
+      });
+    }
+
+    this.futureStringArr.shift();
+    this.fillFutureStringArr();
 
     this.inputValue = '';
+  }
+
+  pushPastStringArr(colorChar: ColorChar) {
+    this.pastStringArr.push(colorChar);
+    if (this.pastStringArr.length > this.pastStringArrMaxLength) {
+      this.pastStringArr.shift();
+    }
+  }
+
+  fillFutureStringArr() {
+    while (this.futureStringArr.length < this.futureStringArrMaxLength) {
+      if (this.sourceStringPointer >= this.sourceString.length) {
+        this.sourceStringPointer = 0;
+      }
+
+      const colorChar: ColorChar = {
+        char: this.sourceString.substr(this.sourceStringPointer, 1),
+        color: CharColors.true,
+      };
+
+      this.sourceStringPointer++;
+
+      this.futureStringArr.push(colorChar);
+    }
   }
 }
