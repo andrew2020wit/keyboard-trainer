@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralService } from './../general-service.service';
 import { defaultText } from './default-text';
 
 class ColorChar {
@@ -30,7 +31,11 @@ export class TrainerComponent implements OnInit {
 
   inputValue = '';
 
-  constructor() {}
+  maxDeltaTime = 3000;
+  time1 = 0;
+  time2 = 0;
+
+  constructor(private generalService: GeneralService) {}
 
   ngOnInit(): void {
     this.fillFutureStringArr();
@@ -45,9 +50,15 @@ export class TrainerComponent implements OnInit {
         char: needKey,
         color: CharColors.true,
       });
-    } else {
-      //console.log('not match, needKey, key: ', needKey, '-', key);
 
+      // speed measuring
+      this.time2 = Date.now();
+      const deltaTime = this.time2 - this.time1;
+      if (deltaTime < this.maxDeltaTime) {
+        this.generalService.takeSpeedData(deltaTime);
+      }
+      this.time1 = this.time2;
+    } else {
       this.pushPastStringArr({
         char: needKey,
         color: CharColors.wrong,

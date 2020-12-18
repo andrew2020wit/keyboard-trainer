@@ -9,10 +9,11 @@ import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { TrainerComponent } from './trainer/trainer.component';
 import { CharSpanComponent } from './char-span/char-span.component';
+import { InfoPanelComponent } from './info-panel/info-panel.component';
 
 const materialModules = [MatToolbarModule, MatInputModule];
 @NgModule({
-  declarations: [AppComponent, HomePageComponent, TrainerComponent, CharSpanComponent],
+  declarations: [AppComponent, HomePageComponent, TrainerComponent, CharSpanComponent, InfoPanelComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
