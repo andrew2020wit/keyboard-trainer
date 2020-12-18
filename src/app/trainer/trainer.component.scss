@@ -1,6 +1,5 @@
 .container {
   display: flex;
-  font-size: xx-large;
 }
 
 .past,
@@ -15,7 +14,8 @@
   overflow: hidden;
   text-overflow: clip;
   white-space: pre;
-  font-family: "Roboto", sans-serif;
+  font-family: "Andika New Basic", sans-serif;
+  font-size: 3rem;
 }
 
 .past {
