@@ -7,7 +7,6 @@ import { GeneralService } from './general-service.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'keyboard-trainer';
   constructor(private generalService: GeneralService) {
     this.generalService.loadState();
     setInterval(() => {

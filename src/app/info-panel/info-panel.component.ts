@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { GeneralService } from '../general-service.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { GeneralService } from '../general-service.service';
   templateUrl: './info-panel.component.html',
   styleUrls: ['./info-panel.component.scss'],
 })
-export class InfoPanelComponent implements OnInit {
+export class InfoPanelComponent {
   speed = 0;
   time = 0;
   timeStr = '';
@@ -28,7 +28,6 @@ export class InfoPanelComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
   computeTimeStr() {
     let s, m, h, t: number;
     t = Math.floor(this.time / 1000);

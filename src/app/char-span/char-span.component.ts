@@ -6,8 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./char-span.component.scss'],
 })
 export class CharSpanComponent implements OnInit {
-  @Input() char = 'd';
-  @Input() color = 'red';
+  @Input() char = '';
+  @Input() color = '';
 
   constructor() {}
 
