@@ -63,6 +63,8 @@ export class GeneralService {
     this.text = str;
     this.appState.startTextPointer = 0;
     localStorage.setItem(localStorTextKey, str);
+    this.saveState();
+    location.reload();
   }
 
   resetText() {
