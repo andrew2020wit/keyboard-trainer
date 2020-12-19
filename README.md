@@ -1,4 +1,4 @@
-# KeyboardTrainer, v0.6
+# KeyboardTrainer, v0.9
 
 Application for practicing blind typing on the keyboard.
 
