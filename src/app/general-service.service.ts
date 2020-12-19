@@ -8,7 +8,7 @@ const localStorTextKey = 'localStorTextKey';
 class AppState {
   times: number;
   presses: number;
-  textPointer: number;
+  startTextPointer: number;
 }
 
 @Injectable({
@@ -18,10 +18,11 @@ export class GeneralService {
   private appState: AppState = {
     times: 0,
     presses: 0,
-    textPointer: 0,
+    startTextPointer: 0,
   };
 
   private text = '';
+  private currentTextPointer = 0;
 
   speed$ = new BehaviorSubject<number>(0);
   times$ = new BehaviorSubject<number>(0);
@@ -60,7 +61,7 @@ export class GeneralService {
 
   newText(str: string) {
     this.text = str;
-    this.appState.textPointer = 0;
+    this.appState.startTextPointer = 0;
     localStorage.setItem(localStorTextKey, str);
   }
 
@@ -76,7 +77,7 @@ export class GeneralService {
 
   setNullState() {
     this.appState = {
-      textPointer: 0,
+      startTextPointer: 0,
       times: 0,
       presses: 0,
     };
@@ -86,11 +87,14 @@ export class GeneralService {
 
   loadState() {
     const c = JSON.parse(localStorage.getItem(localStorKey));
-    if (!c) {
+    if (c) {
+      this.appState = c;
+      this.activateState();
+    } else {
       this.setNullState();
-      return;
     }
-    this.appState = c;
+
+    this.currentTextPointer = this.appState.startTextPointer;
 
     // text
     let text = localStorage.getItem(localStorTextKey);
@@ -98,17 +102,25 @@ export class GeneralService {
       text = defaultText;
     }
     this.text = text;
-
-    this.activateState();
   }
 
   getNextChar(): string {
-    if (this.appState.textPointer >= this.text.length) {
-      this.appState.textPointer = 0;
+    if (this.currentTextPointer >= this.text.length) {
+      this.currentTextPointer = 0;
     }
-    const char = this.text.substr(this.appState.textPointer, 1);
-    this.appState.textPointer = this.appState.textPointer + 1;
+
+    const char = this.text.substr(this.currentTextPointer, 1);
+
+    this.currentTextPointer = this.currentTextPointer + 1;
+
     return char;
+  }
+
+  setNextStartTextPoint() {
+    this.appState.startTextPointer = this.appState.startTextPointer + 1;
+    if (this.appState.startTextPointer >= this.text.length) {
+      this.appState.startTextPointer = 0;
+    }
   }
 
   getText() {

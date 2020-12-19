@@ -77,7 +77,7 @@ export class TrainerComponent implements OnInit {
     if (this.pastStringArr.length > this.pastStringArrMaxLength) {
       this.pastStringArr.shift();
     }
-    //console.log('this.pastStringArr', this.pastStringArr);
+    this.generalService.setNextStartTextPoint();
   }
 
   fillFutureStringArr() {
