@@ -20,7 +20,7 @@ enum CharColors {
 })
 export class TrainerComponent implements OnInit {
   futureStringArr: ColorChar[] = [];
-  futureStringArrMaxLength = 50;
+  futureStringArrMaxLength = 30;
 
   pastStringArr: ColorChar[] = [];
   pastStringArrMaxLength = 30;
