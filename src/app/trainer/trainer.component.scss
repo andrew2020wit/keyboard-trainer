@@ -4,24 +4,23 @@
 
 .past,
 .future {
+  display: flex;
   width: 100%;
   max-width: 50%;
   background-color: beige;
-  //border: 1px solid black;
   padding-top: 1rem;
   padding-bottom: 1rem;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: clip;
   white-space: pre;
   font-family: "Andika New Basic", sans-serif;
   font-size: 3rem;
 }
 
 .past {
-  text-align: right;
+  //  text-align: right;
   background-color: bisque;
-  white-space: pre;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .input-div {

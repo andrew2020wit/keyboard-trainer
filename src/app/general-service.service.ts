@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { defaultText } from './trainer/default-text';
+import { defaultText } from './default-text';
 
 const localStorKey = 'localStorKey';
 const localStorTextKey = 'localStorTextKey';
@@ -62,6 +62,10 @@ export class GeneralService {
     this.text = str;
     this.appState.textPointer = 0;
     localStorage.setItem(localStorTextKey, str);
+  }
+
+  resetText() {
+    this.newText(defaultText);
   }
 
   private activateState() {

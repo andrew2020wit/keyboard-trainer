@@ -25,4 +25,8 @@ export class SettingPageComponent implements OnInit {
   clearState() {
     this.generalService.setNullState();
   }
+  resetText() {
+    this.generalService.resetText();
+    this.text = this.generalService.getText();
+  }
 }
