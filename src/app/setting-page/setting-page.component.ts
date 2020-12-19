@@ -10,9 +10,7 @@ export class SettingPageComponent implements OnInit {
   text = '';
 
   constructor(private generalService: GeneralService) {
-    this.generalService.sourceString$.subscribe((str) => {
-      this.text = str;
-    });
+    this.text = this.generalService.getText();
   }
 
   ngOnInit(): void {}
@@ -21,7 +19,7 @@ export class SettingPageComponent implements OnInit {
     if (this.text.length < 100) {
       return;
     }
-    this.generalService.sourceString$.next(this.text);
+    this.generalService.newText(this.text);
   }
 
   clearState() {

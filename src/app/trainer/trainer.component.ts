@@ -19,9 +19,6 @@ enum CharColors {
   styleUrls: ['./trainer.component.scss'],
 })
 export class TrainerComponent implements OnInit {
-  sourceString = '';
-  sourceStringPointer = 0;
-
   futureStringArr: ColorChar[] = [];
   futureStringArrMaxLength = 50;
 
@@ -34,13 +31,7 @@ export class TrainerComponent implements OnInit {
   time1 = 0;
   time2 = 0;
 
-  constructor(private generalService: GeneralService) {
-    this.generalService.sourceString$.subscribe((str) => {
-      this.sourceString = str;
-      this.futureStringArr = [];
-      this.fillFutureStringArr();
-    });
-  }
+  constructor(private generalService: GeneralService) {}
 
   ngOnInit(): void {
     this.fillFutureStringArr();
@@ -91,16 +82,12 @@ export class TrainerComponent implements OnInit {
 
   fillFutureStringArr() {
     while (this.futureStringArr.length < this.futureStringArrMaxLength) {
-      if (this.sourceStringPointer >= this.sourceString.length) {
-        this.sourceStringPointer = 0;
-      }
+      const nextChar = this.generalService.getNextChar();
 
       const colorChar: ColorChar = {
-        char: this.sourceString.substr(this.sourceStringPointer, 1),
+        char: nextChar,
         color: CharColors.true,
       };
-
-      this.sourceStringPointer++;
 
       this.futureStringArr.push(colorChar);
     }

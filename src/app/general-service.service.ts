@@ -3,76 +3,81 @@ import { BehaviorSubject } from 'rxjs';
 import { defaultText } from './trainer/default-text';
 
 const localStorKey = 'localStorKey';
+const localStorTextKey = 'localStorTextKey';
 
-class LocalStor {
+class AppState {
   times: number;
   presses: number;
-  text: string;
+  textPointer: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class GeneralService {
-  private localStor: LocalStor = {
+  private appState: AppState = {
     times: 0,
     presses: 0,
-    text: '',
+    textPointer: 0,
   };
+
+  private text = '';
 
   speed$ = new BehaviorSubject<number>(0);
   times$ = new BehaviorSubject<number>(0);
   presses$ = new BehaviorSubject<number>(0);
-  sourceString$ = new BehaviorSubject<string>('');
 
-  constructor() {
-    this.sourceString$.next(defaultText);
-    this.sourceString$.subscribe((str) => {
-      this.localStor.text = str;
-    });
-  }
+  constructor() {}
 
   takeSpeedData(time: number) {
-    this.setTimes(this.localStor.times + time);
-    this.setPresses(this.localStor.presses + 1);
+    this.setTimes(this.appState.times + time);
+    this.setPresses(this.appState.presses + 1);
     this.computeSpeed();
   }
 
   private computeSpeed() {
-    if (this.localStor.times == 0) {
+    if (this.appState.times == 0) {
       this.speed$.next(0);
       return;
     }
-    const speed = this.localStor.presses / (this.localStor.times / 1000 / 60);
+    const speed = this.appState.presses / (this.appState.times / 1000 / 60);
     this.speed$.next(speed);
   }
+
   private setTimes(t) {
-    this.localStor.times = t;
+    this.appState.times = t;
     this.times$.next(t);
   }
+
   private setPresses(n) {
-    this.localStor.presses = n;
+    this.appState.presses = n;
     this.presses$.next(n);
   }
 
   saveState() {
-    localStorage.setItem(localStorKey, JSON.stringify(this.localStor));
+    localStorage.setItem(localStorKey, JSON.stringify(this.appState));
   }
 
-  activateState() {
-    this.setTimes(this.localStor.times);
-    this.setPresses(this.localStor.presses);
+  newText(str: string) {
+    this.text = str;
+    this.appState.textPointer = 0;
+    localStorage.setItem(localStorTextKey, str);
+  }
+
+  private activateState() {
+    this.setTimes(this.appState.times);
+    this.setPresses(this.appState.presses);
     this.computeSpeed();
-    this.sourceString$.next(this.localStor.text);
   }
 
   setNullState() {
-    this.localStor = {
-      text: defaultText,
+    this.appState = {
+      textPointer: 0,
       times: 0,
       presses: 0,
     };
     this.activateState();
+    this.saveState();
   }
 
   loadState() {
@@ -81,8 +86,28 @@ export class GeneralService {
       this.setNullState();
       return;
     }
-    this.localStor = c;
+    this.appState = c;
+
+    // text
+    let text = localStorage.getItem(localStorTextKey);
+    if (!text) {
+      text = defaultText;
+    }
+    this.text = text;
+
     this.activateState();
-    console.log('this.localStor', this.localStor);
+  }
+
+  getNextChar(): string {
+    if (this.appState.textPointer >= this.text.length) {
+      this.appState.textPointer = 0;
+    }
+    const char = this.text.substr(this.appState.textPointer, 1);
+    this.appState.textPointer = this.appState.textPointer + 1;
+    return char;
+  }
+
+  getText() {
+    return this.text;
   }
 }
