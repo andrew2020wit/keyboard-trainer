@@ -10,7 +10,7 @@ See screenshot:
 
 addition functions:
 
-1. penalty char - add 3 same char, when made mistake.
+1. penalty char - it add 3 same char, when user made mistake.
 2. custom text (settings)
 3. save statistic/text (localStorage)
 

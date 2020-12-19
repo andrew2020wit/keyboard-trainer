@@ -119,7 +119,7 @@ export class GeneralService {
   }
 
   setNextStartTextPoint() {
-    this.appState.startTextPointer = this.appState.startTextPointer + 1;
+    this.appState.startTextPointer += 1;
     if (this.appState.startTextPointer >= this.text.length) {
       this.appState.startTextPointer = 0;
     }
@@ -127,5 +127,9 @@ export class GeneralService {
 
   getText() {
     return this.text;
+  }
+
+  resetCurrentTextPointer() {
+    this.currentTextPointer = this.appState.startTextPointer;
   }
 }

@@ -10,7 +10,6 @@ enum CharColors {
   true = 'black',
   wrong = 'red',
   wrong2 = 'yellow',
-  special = 'blue',
 }
 
 @Component({
@@ -31,7 +30,9 @@ export class TrainerComponent implements OnInit {
   time1 = 0;
   time2 = 0;
 
-  constructor(private generalService: GeneralService) {}
+  constructor(private generalService: GeneralService) {
+    this.generalService.resetCurrentTextPointer();
+  }
 
   ngOnInit(): void {
     this.fillFutureStringArr();
@@ -40,6 +41,10 @@ export class TrainerComponent implements OnInit {
   onKeyPress(event) {
     const key = event.key;
     const needKey = this.futureStringArr[0].char;
+
+    if (this.futureStringArr[0].color == CharColors.true) {
+      this.generalService.setNextStartTextPoint();
+    }
 
     if (needKey == key) {
       this.pushPastStringArr({
@@ -77,7 +82,6 @@ export class TrainerComponent implements OnInit {
     if (this.pastStringArr.length > this.pastStringArrMaxLength) {
       this.pastStringArr.shift();
     }
-    this.generalService.setNextStartTextPoint();
   }
 
   fillFutureStringArr() {
