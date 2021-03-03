@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { defaultText } from './default-text';
-import { removeForbidenChar } from './forbiden-char';
+import { removeForbiddenChar } from './forbiden-char';
 
 const localStorKey = 'localStorKey';
 const localStorTextKey = 'localStorTextKey';
@@ -61,7 +61,7 @@ export class GeneralService {
   }
 
   newText(str: string) {
-    const str2 = removeForbidenChar(str);
+    const str2 = removeForbiddenChar(str);
     this.text = str2;
     this.appState.startTextPointer = 0;
     localStorage.setItem(localStorTextKey, str2);

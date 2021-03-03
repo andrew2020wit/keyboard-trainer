@@ -100,30 +100,18 @@ export class TrainerComponent implements OnInit {
   addPenaltyChar(char: string) {
     const newFutureStringArr: ColorChar[] = [];
     const wrongChar: ColorChar = { char: char, color: CharColors.wrong };
+    const countOfPenaltyChar = 5;
+    const penaltyCharInterval = 5;
 
-    for (let i = 0; i < 5; i++) {
-      if (this.futureStringArr.length == 0) {
-        break;
+    for (let j = 0; j < countOfPenaltyChar; j++) {
+      for (let i = 0; i < penaltyCharInterval; i++) {
+        if (this.futureStringArr.length == 0) {
+          break;
+        }
+        newFutureStringArr.push(this.futureStringArr.shift());
       }
-      newFutureStringArr.push(this.futureStringArr.shift());
+      newFutureStringArr.push(wrongChar);
     }
-    newFutureStringArr.push(wrongChar);
-
-    for (let i = 0; i < 5; i++) {
-      if (this.futureStringArr.length == 0) {
-        break;
-      }
-      newFutureStringArr.push(this.futureStringArr.shift());
-    }
-    newFutureStringArr.push(wrongChar);
-
-    for (let i = 0; i < 5; i++) {
-      if (this.futureStringArr.length == 0) {
-        break;
-      }
-      newFutureStringArr.push(this.futureStringArr.shift());
-    }
-    newFutureStringArr.push(wrongChar);
 
     while (this.futureStringArr.length != 0) {
       newFutureStringArr.push(this.futureStringArr.shift());
