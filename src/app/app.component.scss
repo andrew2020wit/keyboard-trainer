@@ -24,6 +24,9 @@ footer {
   padding: 1rem;
 }
 
-mat-toolbar {
+.mat-toolbar {
   background-color: #e6ecff;
+  @media (max-width: 800px) {
+    font-size: 1rem;
+  }
 }

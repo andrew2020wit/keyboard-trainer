@@ -1,5 +1,7 @@
 .view-box {
   display: flex;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .past,
@@ -13,6 +15,15 @@
   white-space: pre;
   font-family: "Andika New Basic", sans-serif;
   font-size: 3rem;
+  @media (max-width: 1200px){
+    font-size: 2rem;
+  }
+  @media (max-width: 800px){
+    font-size: 1.5rem;
+  }
+  @media (max-width: 600px){
+    font-size: 1rem;
+  }
 }
 
 .past {
