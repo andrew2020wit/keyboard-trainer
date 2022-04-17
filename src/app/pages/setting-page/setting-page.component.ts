@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneralService } from '../../general-service.service';
+import { GeneralService } from '../../services/general-service.service';
 
 @Component({
   selector: 'app-setting-page',

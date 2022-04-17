@@ -7,11 +7,11 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {CharSpanComponent} from './char-span/char-span.component';
+import {CharSpanComponent} from './pages/home-page/trainer/char-span/char-span.component';
 import {HomePageComponent} from './pages/home-page/home-page.component';
-import {InfoPanelComponent} from './info-panel/info-panel.component';
+import {InfoPanelComponent} from './pages/home-page/trainer/info-panel/info-panel.component';
 import {SettingPageComponent} from './pages/setting-page/setting-page.component';
-import {TrainerComponent} from './trainer/trainer.component';
+import {TrainerComponent} from './pages/home-page/trainer/trainer.component';
 
 @NgModule({
   declarations: [
