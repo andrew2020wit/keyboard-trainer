@@ -1,11 +1,11 @@
 <div class="layout">
   <header>
-
     <mat-toolbar>
-      <span>Keyboard trainer, v1.2</span>
+      <span>Keyboard trainer, v1.3</span>
     </mat-toolbar>
 
     <nav>
+
       <button
         mat-button
         color="primary"
@@ -13,8 +13,10 @@
         routerLinkActive="routerLinkActive"
         [routerLinkActiveOptions]="{ exact: true }"
       >
-        Trainer</button
-      ><button
+        Trainer
+      </button>
+
+      <button
         mat-button
         color="primary"
         routerLink="/settings"
@@ -22,20 +24,19 @@
       >
         Settings
       </button>
+
     </nav>
   </header>
 
   <main>
-    <div class="main-content">
       <router-outlet></router-outlet>
-    </div>
   </main>
 
   <footer>
     <mat-toolbar>
-      <span
-        >Keyboard trainer, https://github.com/andrew2020wit, MIT License.</span
-      >
+      <span>
+        Keyboard trainer, https://github.com/andrew2020wit, MIT License.
+      </span>
     </mat-toolbar>
   </footer>
 </div>
