@@ -13,7 +13,7 @@ export class StatisticService {
 
   private statisticState = new StatisticState();
 
-  speed$ = new BehaviorSubject<number>(0);
+  speedPerMinute$ = new BehaviorSubject<number>(0);
   times$ = new BehaviorSubject<number>(0);
   presses$ = new BehaviorSubject<number>(0);
 
@@ -54,11 +54,11 @@ export class StatisticService {
 
   private computeSpeed(): void {
     if (this.statisticState.times === 0) {
-      this.speed$.next(0);
+      this.speedPerMinute$.next(0);
       return;
     }
     const speed = this.statisticState.presses / (this.statisticState.times / 1000 / 60);
-    this.speed$.next(speed);
+    this.speedPerMinute$.next(speed);
   }
 
   private setTimes(time): void {

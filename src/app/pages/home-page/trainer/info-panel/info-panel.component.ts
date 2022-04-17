@@ -1,43 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { StatisticService } from '../../../../services/statistic-service.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-info-panel',
   templateUrl: './info-panel.component.html',
   styleUrls: ['./info-panel.component.scss'],
 })
-export class InfoPanelComponent {
+export class InfoPanelComponent implements OnDestroy {
   speed = 0;
-  time = 0;
   timeStr = '';
   presses = 0;
 
+  private readonly unsubscribe$ = new Subject<void>();
+
   constructor(private generalService: StatisticService) {
-    this.generalService.speed$.subscribe((speed) => {
-      this.speed = Math.round(speed);
-    });
+    this.generalService.speedPerMinute$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((speed) => {
+        this.speed = Math.round(speed);
+      });
 
-    this.generalService.presses$.subscribe((presses) => {
-      if (!presses) {
-        this.presses = 0;
-      } else {
-        this.presses = presses + 1;
-      }
-    });
+    this.generalService.presses$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((presses) => {
+        if (!presses) {
+          this.presses = 0;
+        } else {
+          this.presses = presses + 1;
+        }
+      });
 
-    this.generalService.times$.subscribe((times) => {
-      this.time = times;
-      this.computeTimeStr();
-    });
+    this.generalService.times$
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((times) => {
+        this.timeStr = InfoPanelComponent.computeTimeStr(times);
+      });
   }
 
-  computeTimeStr() {
-    let s, m, h, t: number;
-    t = Math.floor(this.time / 1000);
-    h = Math.floor(t / (60 * 60));
-    t = t - h * (60 * 60);
-    m = Math.floor(t / 60);
-    s = t - m * 60;
-    this.timeStr = h + ' hr, ' + m + ' m, ' + s + ' s.';
+  public static computeTimeStr(time): string {
+    const timeSeconds = Math.floor(time / 1000);
+    const hours = Math.floor(timeSeconds / (60 * 60));
+    const timeSecondsWithoutHours = timeSeconds - hours * (60 * 60);
+    const minutes = Math.floor(timeSecondsWithoutHours / 60);
+    const seconds = timeSecondsWithoutHours - minutes * 60;
+    return hours + ' hr, ' + minutes + ' m, ' + seconds + ' s.';
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }
