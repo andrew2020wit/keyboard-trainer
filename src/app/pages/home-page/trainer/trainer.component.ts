@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneralService } from '../../../services/general-service.service';
+import { StatisticService } from '../../../services/statistic-service.service';
+import {TextService} from '../../../services/text.service';
 
 class ColorChar {
   char: string;
@@ -30,17 +31,17 @@ export class TrainerComponent implements OnInit {
   time1 = 0;
   time2 = 0;
 
-  constructor(private generalService: GeneralService) {}
+  constructor(private statisticService: StatisticService, private textService: TextService) {}
 
   ngOnInit(): void {
-    this.generalService.resetCurrentTextPointer();
+    this.textService.resetCurrentTextPointer();
     this.fillFutureStringArr();
   }
 
   fillFutureStringArr(): void {
     while (this.futureStringArr.length < this.futureStringArrMaxLength) {
 
-      const nextChar = this.generalService.getNextChar();
+      const nextChar = this.textService.getNextChar();
 
       const colorChar: ColorChar = {
         char: nextChar,
@@ -56,7 +57,7 @@ export class TrainerComponent implements OnInit {
     const needKey = this.futureStringArr[0].char;
 
     if (this.futureStringArr[0].color === CharColors.true) {
-      this.generalService.setNextStartTextPoint();
+      this.textService.setNextStartTextPoint();
     }
 
     if (needKey === key) {
@@ -69,7 +70,7 @@ export class TrainerComponent implements OnInit {
       this.time2 = Date.now();
       const deltaTime = this.time2 - this.time1;
       if (deltaTime < this.maxDeltaTime) {
-        this.generalService.takeSpeedData(deltaTime);
+        this.statisticService.takeSpeedData(deltaTime);
       }
       this.time1 = this.time2;
 

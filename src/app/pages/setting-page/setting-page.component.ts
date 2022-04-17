@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneralService } from '../../services/general-service.service';
+import { StatisticService } from '../../services/statistic-service.service';
+import {TextService} from '../../services/text.service';
 
 @Component({
   selector: 'app-setting-page',
@@ -10,25 +11,25 @@ export class SettingPageComponent implements OnInit {
 
   text = '';
 
-  constructor(private generalService: GeneralService) {}
+  constructor(private textService: TextService, private statisticService: StatisticService) {}
 
   ngOnInit(): void {
-    this.text = this.generalService.getText();
+    this.text = this.textService.getText();
   }
 
   saveText(): void {
     if (this.text.length < 100) {
       return;
     }
-    this.generalService.setNewText(this.text);
+    this.textService.setNewText(this.text);
   }
 
   clearState(): void {
-    this.generalService.setNullState();
+    this.statisticService.setNullState();
   }
 
   resetText(): void {
-    this.generalService.resetText();
-    this.text = this.generalService.getText();
+    this.textService.resetText();
+    this.text = this.textService.getText();
   }
 }

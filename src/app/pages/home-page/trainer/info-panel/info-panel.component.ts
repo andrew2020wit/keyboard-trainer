@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GeneralService } from '../../../../services/general-service.service';
+import { StatisticService } from '../../../../services/statistic-service.service';
 
 @Component({
   selector: 'app-info-panel',
@@ -12,7 +12,7 @@ export class InfoPanelComponent {
   timeStr = '';
   presses = 0;
 
-  constructor(private generalService: GeneralService) {
+  constructor(private generalService: StatisticService) {
     this.generalService.speed$.subscribe((speed) => {
       this.speed = Math.round(speed);
     });

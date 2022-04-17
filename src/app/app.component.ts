@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { GeneralService } from './services/general-service.service';
+import { StatisticService } from './services/statistic-service.service';
+import {TextService} from './services/text.service';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,11 @@ import { GeneralService } from './services/general-service.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(private generalService: GeneralService) {
-
-    this.generalService.loadState();
+  constructor(private statisticService: StatisticService, private textService: TextService) {
 
     setInterval(() => {
-      this.generalService.saveState();
+      this.statisticService.saveState();
+      this.textService.saveState();
     }, 2000);
 
   }
