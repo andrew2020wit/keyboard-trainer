@@ -7,25 +7,27 @@ import { GeneralService } from '../../general-service.service';
   styleUrls: ['./setting-page.component.scss'],
 })
 export class SettingPageComponent implements OnInit {
+
   text = '';
 
-  constructor(private generalService: GeneralService) {
+  constructor(private generalService: GeneralService) {}
+
+  ngOnInit(): void {
     this.text = this.generalService.getText();
   }
 
-  ngOnInit(): void {}
-
-  saveText() {
+  saveText(): void {
     if (this.text.length < 100) {
       return;
     }
-    this.generalService.newText(this.text);
+    this.generalService.setNewText(this.text);
   }
 
-  clearState() {
+  clearState(): void {
     this.generalService.setNullState();
   }
-  resetText() {
+
+  resetText(): void {
     this.generalService.resetText();
     this.text = this.generalService.getText();
   }

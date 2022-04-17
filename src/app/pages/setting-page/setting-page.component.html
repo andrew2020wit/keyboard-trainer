@@ -7,12 +7,14 @@
 </button>
 <br/>
 
-<button mat-button color="primary" (click)="saveText()">
+<button mat-button color="primary"
+        (click)="saveText()"
+        [disabled]="text.length < 100">
   SaveText
 </button>
 
 <mat-form-field>
-  <mat-label>Text (min 100 char, max 10000 char)</mat-label>
+  <mat-label>Text (min: 100 char, max: 10000 char)</mat-label>
   <textarea
     matInput
     placeholder="Text (max 10000 char)"

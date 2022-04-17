@@ -60,7 +60,7 @@ export class GeneralService {
     localStorage.setItem(localStorKey, JSON.stringify(this.appState));
   }
 
-  newText(str: string) {
+  setNewText(str: string) {
     const str2 = removeForbiddenChar(str);
     this.text = str2;
     this.appState.startTextPointer = 0;
@@ -70,7 +70,7 @@ export class GeneralService {
   }
 
   resetText() {
-    this.newText(defaultText);
+    this.setNewText(defaultText);
   }
 
   private activateState() {
