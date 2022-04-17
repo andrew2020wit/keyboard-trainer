@@ -1,12 +1,8 @@
-# KeyboardTrainer, v1.2
+# KeyboardTrainer, v1.3
 
 This is an application for practicing blind typing on the keyboard.
 
 Used technologies: Angular, without server.
-
-See screenshot:
-
-/screenshots
 
 addition functions:
 
