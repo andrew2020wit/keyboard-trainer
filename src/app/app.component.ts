@@ -8,9 +8,12 @@ import { GeneralService } from './general-service.service';
 })
 export class AppComponent {
   constructor(private generalService: GeneralService) {
+
     this.generalService.loadState();
+
     setInterval(() => {
       this.generalService.saveState();
     }, 2000);
+
   }
 }

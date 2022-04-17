@@ -11,10 +11,12 @@ export class InfoPanelComponent {
   time = 0;
   timeStr = '';
   presses = 0;
+
   constructor(private generalService: GeneralService) {
     this.generalService.speed$.subscribe((speed) => {
       this.speed = Math.round(speed);
     });
+
     this.generalService.presses$.subscribe((presses) => {
       if (!presses) {
         this.presses = 0;
@@ -22,6 +24,7 @@ export class InfoPanelComponent {
         this.presses = presses + 1;
       }
     });
+
     this.generalService.times$.subscribe((times) => {
       this.time = times;
       this.computeTimeStr();
