@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { defaultText } from './default-data/default-text';
-import { removeForbiddenChar } from './forbiden-char';
+import { removeForbiddenChar } from './default-data/forbiden-char';
 
 const localStorKey = 'localStorKey';
 const localStorTextKey = 'localStorTextKey';
