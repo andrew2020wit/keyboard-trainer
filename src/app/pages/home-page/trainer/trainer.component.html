@@ -1,6 +1,6 @@
 <app-info-panel></app-info-panel>
-<!-- view -->
-<div class="container">
+
+<div class="view-box">
   <div class="past">
     <app-char-span
       *ngFor="let char of pastStringArr"
@@ -18,9 +18,8 @@
   </div>
 </div>
 
-<!-- input -->
 <div class="input-div">
-  <mat-form-field style="width: 100%">
+  <mat-form-field >
     <mat-label>Type here!</mat-label>
     <input
       matInput

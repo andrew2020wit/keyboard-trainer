@@ -1,4 +1,4 @@
-.container {
+.view-box {
   display: flex;
 }
 
@@ -10,7 +10,6 @@
   background-color: beige;
   padding-top: 1rem;
   padding-bottom: 1rem;
-  white-space: nowrap;
   white-space: pre;
   font-family: "Andika New Basic", sans-serif;
   font-size: 3rem;
@@ -29,4 +28,7 @@
   background-color: beige;
   min-height: 2rem;
   border: 1px solid black;
+  .mat-form-field {
+    width: 100%;
+  }
 }
