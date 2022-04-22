@@ -19,4 +19,12 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
   });
+
+  it('title should contain "Keyboard trainer"', () => {
+    const element: HTMLElement = TestBed.createComponent(AppComponent).nativeElement;
+    const titleSpan = element.querySelector('#title-span');
+    expect(titleSpan.textContent).toContain('Keyboard trainer');
+  });
+
+
 });
