@@ -13,4 +13,15 @@ describe('TextService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('get third char of default text', () => {
+    service.getNextChar();
+    service.getNextChar();
+    expect(service.getNextChar()).toBe('r');
+  });
+
+  it('get first char of default text', () => {
+    expect(service.getNextChar()).toBe('L');
+  });
+
 });
