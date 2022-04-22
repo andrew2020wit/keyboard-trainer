@@ -16,21 +16,21 @@ describe('StatisticService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('presses$ should be properly computed', (done) => {
+  it('compute presses$', (done) => {
     service.presses$.subscribe(presses => {
       expect(presses).toBe(3);
       done();
     });
   });
 
-  it('times$ should be properly computed', (done) => {
+  it('compute times$', (done) => {
     service.times$.subscribe(time => {
       expect(time).toBe(3000);
       done();
     });
   });
 
-  it('speedPerMinute$ should be properly computed', (done) => {
+  it('compute speedPerMinute$', (done) => {
     service.speedPerMinute$.subscribe(speedPerMinute => {
       expect(speedPerMinute).toBe(60);
       done();
