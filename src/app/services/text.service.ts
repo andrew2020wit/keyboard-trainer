@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { removeForbiddenChar } from '../default-data/forbiden-chars';
 import { defaultText } from '../default-data/default-text';
 
-class TextState {
+export class TextState {
   text = '';
   startTextPointer = 0;
 }
@@ -83,13 +83,4 @@ export class TextService {
     }
   }
 
-  // setNullState(): void {
-  //   this.appState = {
-  //     startTextPointer: 0,
-  //     times: 0,
-  //     presses: 0,
-  //   };
-  //   this.activateState();
-  //   this.saveState();
-  // }
 }
