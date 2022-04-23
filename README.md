@@ -6,7 +6,7 @@ This is an application for practicing blind typing on the keyboard.
 
 ## addition functions:
 
-1. penalty char - it add 3 same char, when user made mistake.
+1. penalty char - it adds 3 same char, when user made mistake.
 2. custom text (settings)
 3. save statistic/text (localStorage)
 
