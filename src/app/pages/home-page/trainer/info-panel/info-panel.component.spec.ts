@@ -1,25 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { InfoPanelComponent } from './info-panel.component';
 
 describe('InfoPanelComponent', () => {
-  let component: InfoPanelComponent;
-  let fixture: ComponentFixture<InfoPanelComponent>;
+  it('compute time string', () => {
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ InfoPanelComponent ]
-    })
-    .compileComponents();
-  });
+    const expectedString = '2 hr, 3 m, 5 s.';
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(InfoPanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    const resultString = InfoPanelComponent.computeTimeStr(
+      1000 * (5 + 60 * (3 + 60 * 2))
+    );
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(expectedString).toBe(resultString);
   });
 });
