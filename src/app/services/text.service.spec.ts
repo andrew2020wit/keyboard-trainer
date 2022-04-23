@@ -14,14 +14,20 @@ describe('TextService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('get third char of default text', () => {
-    service.getNextChar();
-    service.getNextChar();
-    expect(service.getNextChar()).toBe('r');
+  it('get next char of default text', () => {
+
+    expect(service.getNextChar())
+      .withContext('get first char')
+      .toBe('L');
+
+    expect(service.getNextChar())
+      .withContext('get second char')
+      .toBe('o');
+
+    expect(service.getNextChar())
+      .withContext('get third char')
+      .toBe('r');
   });
 
-  it('get first char of default text', () => {
-    expect(service.getNextChar()).toBe('L');
-  });
 
 });
