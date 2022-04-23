@@ -23,7 +23,7 @@ describe('TrainerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  fit('inputs', () => {
+  it('inputs', () => {
     component.onKeyPress({ key: defaultText[0] });
     expect(component.futureStringArr[0].char)
       .withContext('pushed first key right, check next char')
