@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CharSpanComponent } from './char-span.component';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {CharSpanComponent} from './char-span.component';
 
 describe('CharSpanComponent', () => {
   let component: CharSpanComponent;
@@ -8,9 +7,9 @@ describe('CharSpanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CharSpanComponent ]
+      declarations: [CharSpanComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +21,11 @@ describe('CharSpanComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('show char', () => {
+    component.char = 'b';
+    fixture.detectChanges();
+    expect(fixture.nativeElement.textContent).toBe('b');
+  });
+
 });
