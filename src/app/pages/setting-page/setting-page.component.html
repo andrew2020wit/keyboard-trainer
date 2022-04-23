@@ -7,7 +7,9 @@
 </button>
 <br/>
 
-<button mat-button color="primary"
+<button mat-button
+        color="primary"
+        id="save-text-button"
         (click)="saveText()"
         [disabled]="text.length < 100">
   SaveText
@@ -19,6 +21,7 @@
     matInput
     placeholder="Text (max 10000 char)"
     minlength="100"
+    id="text-area"
     maxlength="10000"
     [(ngModel)]="text"
   ></textarea>
