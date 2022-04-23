@@ -12,6 +12,7 @@ This is an application for practicing blind typing on the keyboard.
 
 ## Tests:
 - Jasmine - unit tests
+- Cypress - end-to-end tests
 
 ## MIT License.
 
