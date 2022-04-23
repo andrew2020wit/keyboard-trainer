@@ -7,7 +7,7 @@ class ColorChar {
   color: CharColors;
 }
 
-enum CharColors {
+export enum CharColors {
   true = 'black',
   wrong = 'red',
   wrong2 = 'yellow',
