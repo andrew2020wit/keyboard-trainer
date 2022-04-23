@@ -1,7 +1,9 @@
 <div>
   <span>
     Speed: {{ speed }} symb/min;
-    Symbols: {{ presses }};
+    <span data-testid="info-panel-presses">
+      Symbols: {{ presses }};
+    </span>
     Time: {{ timeStr }}
   </span>
 </div>

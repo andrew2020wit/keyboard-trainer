@@ -3,7 +3,8 @@
 <div class="view-box">
   <div class="past">
     <app-char-span
-      *ngFor="let char of pastStringArr"
+      *ngFor="let char of pastStringArr; let i = index"
+      [id]="'pastString-'+i"
       [char]="char.char"
       [color]="char.color"
     ></app-char-span>
@@ -11,7 +12,8 @@
 
   <div class="future">
     <app-char-span
-      *ngFor="let char of futureStringArr"
+      *ngFor="let char of futureStringArr; let i = index"
+      [id]="'futureString-'+i"
       [char]="char.char"
       [color]="char.color"
     ></app-char-span>
