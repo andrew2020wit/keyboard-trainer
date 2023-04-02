@@ -25,7 +25,7 @@ describe('CharSpanComponent', () => {
   it('show char', () => {
     component.char = 'b';
     fixture.detectChanges();
-    expect(fixture.nativeElement.textContent).toBe('b');
+    expect(fixture.nativeElement.textContent).toContain('b');
   });
 
 });

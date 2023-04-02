@@ -11,26 +11,15 @@ class StatisticState {
 })
 export class StatisticService {
 
-  private statisticState = new StatisticState();
-
   speedPerMinute$ = new BehaviorSubject<number>(0);
   times$ = new BehaviorSubject<number>(0);
   presses$ = new BehaviorSubject<number>(0);
 
+  private statisticState = new StatisticState();
   private readonly localStorageStatisticStateKey = 'StatisticState';
 
   constructor() {
     this.loadState();
-  }
-
-  private loadState(): void {
-    const statisticStateFromStore = JSON.parse(localStorage.getItem(this.localStorageStatisticStateKey)) as StatisticState;
-    if (statisticStateFromStore?.times) {
-      this.statisticState = statisticStateFromStore;
-    } else {
-      this.setNullState();
-    }
-    this.activateState();
   }
 
   setNullState(): void {
@@ -38,25 +27,40 @@ export class StatisticService {
       times: 0,
       presses: 0,
     };
+
     this.activateState();
     this.saveState();
   }
 
-  public saveState(): void {
+  saveState(): void {
     localStorage.setItem(this.localStorageStatisticStateKey, JSON.stringify(this.statisticState));
   }
 
-  public takeSpeedData(time: number): void {
+  takeSpeedData(time: number): void {
     this.setTimes(this.statisticState.times + time);
     this.setPresses(this.statisticState.presses + 1);
     this.computeSpeed();
   }
 
+  private loadState(): void {
+    const statisticStateFromStore = JSON.parse(localStorage.getItem(this.localStorageStatisticStateKey)) as StatisticState;
+
+    if (statisticStateFromStore?.times) {
+      this.statisticState = statisticStateFromStore;
+    } else {
+      this.setNullState();
+    }
+
+    this.activateState();
+  }
+
   private computeSpeed(): void {
     if (this.statisticState.times === 0) {
       this.speedPerMinute$.next(0);
+
       return;
     }
+
     const speed = this.statisticState.presses / (this.statisticState.times / 1000 / 60);
     this.speedPerMinute$.next(speed);
   }
@@ -71,12 +75,10 @@ export class StatisticService {
     this.presses$.next(n);
   }
 
-
   private activateState(): void {
     this.setTimes(this.statisticState.times);
     this.setPresses(this.statisticState.presses);
     this.computeSpeed();
   }
-
 
 }

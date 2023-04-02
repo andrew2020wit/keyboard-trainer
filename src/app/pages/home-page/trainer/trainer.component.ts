@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { StatisticService } from '../../../services/statistic-service.service';
+import {Component, OnInit} from '@angular/core';
+import {StatisticService} from '../../../services/statistic-service.service';
 import {TextService} from '../../../services/text.service';
-
-class ColorChar {
-  char: string;
-  color: CharColors;
-}
 
 export enum CharColors {
   true = 'black',
   wrong = 'red',
   wrong2 = 'yellow',
+}
+
+class ColorChar {
+  char: string;
+  color: CharColors;
 }
 
 @Component({
@@ -21,17 +21,18 @@ export enum CharColors {
 export class TrainerComponent implements OnInit {
   futureStringArr: ColorChar[] = [];
   futureStringArrMaxLength = 30;
-
   pastStringArr: ColorChar[] = [];
   pastStringArrMaxLength = 30;
-
   inputValue = '';
-
   maxDeltaTime = 3000;
   time1 = 0;
   time2 = 0;
 
-  constructor(private statisticService: StatisticService, private textService: TextService) {}
+  constructor(
+    private statisticService: StatisticService,
+    private textService: TextService
+  ) {
+  }
 
   ngOnInit(): void {
     this.textService.resetCurrentTextPointer();
@@ -69,9 +70,11 @@ export class TrainerComponent implements OnInit {
       // speed measuring
       this.time2 = Date.now();
       const deltaTime = this.time2 - this.time1;
+
       if (deltaTime < this.maxDeltaTime) {
         this.statisticService.takeSpeedData(deltaTime);
       }
+
       this.time1 = this.time2;
 
     } else {
@@ -79,21 +82,23 @@ export class TrainerComponent implements OnInit {
         char: `|${needKey}|`,
         color: CharColors.wrong,
       });
+
       this.pushPastStringArr({
         char: `|${key}|`,
         color: CharColors.wrong2,
       });
+
       this.addPenaltyChar(needKey);
     }
 
     this.futureStringArr.shift();
     this.fillFutureStringArr();
-
     this.inputValue = '';
   }
 
   pushPastStringArr(colorChar: ColorChar): void {
     this.pastStringArr.push(colorChar);
+
     if (this.pastStringArr.length > this.pastStringArrMaxLength) {
       this.pastStringArr.shift();
     }
@@ -101,7 +106,7 @@ export class TrainerComponent implements OnInit {
 
   addPenaltyChar(char: string): void {
     const newFutureStringArr: ColorChar[] = [];
-    const wrongChar: ColorChar = { char, color: CharColors.wrong };
+    const wrongChar: ColorChar = {char, color: CharColors.wrong};
     const countOfPenaltyChar = 5;
     const penaltyCharInterval = 5;
 

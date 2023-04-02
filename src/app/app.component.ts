@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
-import { StatisticService } from './services/statistic-service.service';
-import { TextService } from './services/text.service';
+import {Component, OnDestroy} from '@angular/core';
+import {StatisticService} from './services/statistic-service.service';
+import {TextService} from './services/text.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { TextService } from './services/text.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnDestroy {
-  private interval = 0;
+  private interval: number;
 
   constructor(
     private statisticService: StatisticService,

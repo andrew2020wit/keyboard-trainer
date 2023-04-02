@@ -39,12 +39,13 @@ export class InfoPanelComponent implements OnDestroy {
       });
   }
 
-  public static computeTimeStr(time): string {
+  static computeTimeStr(time): string {
     const timeSeconds = Math.floor(time / 1000);
     const hours = Math.floor(timeSeconds / (60 * 60));
     const timeSecondsWithoutHours = timeSeconds - hours * (60 * 60);
     const minutes = Math.floor(timeSecondsWithoutHours / 60);
     const seconds = timeSecondsWithoutHours - minutes * 60;
+
     return hours + ' hr, ' + minutes + ' m, ' + seconds + ' s.';
   }
 

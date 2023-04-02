@@ -1,7 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { CharColors, TrainerComponent } from './trainer.component';
-import { defaultText } from '../../../default-data/default-text';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {CharColors, TrainerComponent} from './trainer.component';
+import {defaultText} from '../../../default-data/default-text';
 
 describe('TrainerComponent', () => {
   let component: TrainerComponent;
@@ -24,7 +23,7 @@ describe('TrainerComponent', () => {
   });
 
   it('inputs', () => {
-    component.onKeyPress({ key: defaultText[0] });
+    component.onKeyPress({key: defaultText[0]});
     expect(component.futureStringArr[0].char)
       .withContext('pushed first key right, check next char')
       .toBe(defaultText[1]);
@@ -34,7 +33,7 @@ describe('TrainerComponent', () => {
 
     const wrongChar = 'a';
 
-    component.onKeyPress({ key: wrongChar });
+    component.onKeyPress({key: wrongChar});
     expect(component.futureStringArr[0].char)
       .withContext('pushed second key wrong, check next char')
       .toBe(defaultText[2]);

@@ -1,4 +1,4 @@
-import { InfoPanelComponent } from './info-panel.component';
+import {InfoPanelComponent} from './info-panel.component';
 
 describe('InfoPanelComponent', () => {
   it('compute time string', () => {

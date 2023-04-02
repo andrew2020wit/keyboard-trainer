@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { StatisticService } from '../../services/statistic-service.service';
+import {Component, OnInit} from '@angular/core';
+import {StatisticService} from '../../services/statistic-service.service';
 import {TextService} from '../../services/text.service';
 
 @Component({
@@ -11,7 +11,11 @@ export class SettingPageComponent implements OnInit {
 
   text = '';
 
-  constructor(private textService: TextService, private statisticService: StatisticService) {}
+  constructor(
+    private textService: TextService,
+    private statisticService: StatisticService
+  ) {
+  }
 
   ngOnInit(): void {
     this.text = this.textService.getText();
@@ -21,6 +25,7 @@ export class SettingPageComponent implements OnInit {
     if (this.text.length < 100) {
       return;
     }
+
     this.textService.setNewText(this.text);
   }
 
